@@ -15,8 +15,10 @@ const payload = {
 // Validade do token (Assinatura, ou carimbo no cartório)
 const key = 'abcd23456';
 
-const headerEncoded = Buffer.from(JSON.stringify(header)).toString('base64');
-const payloadEncoded = Buffer.from(JSON.stringify(payload)).toString('base64');
+const headerEncoded = Buffer.from(JSON.stringify(header)).toString('base64url');
+const payloadEncoded = Buffer.from(JSON.stringify(payload)).toString(
+  'base64url',
+);
 
 // console.log({ headerEncoded, payloadEncoded });
 
