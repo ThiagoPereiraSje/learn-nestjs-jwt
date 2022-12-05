@@ -13,6 +13,8 @@ export class AuthController {
   @Post('login')
   login(@Body() body: ReqBody) {
     // Gerar token
-    this.authService.login(body.username, body.password);
+    const token = this.authService.login(body.username, body.password);
+
+    return { token };
   }
 }
