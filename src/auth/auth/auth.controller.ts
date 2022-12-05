@@ -1,11 +1,13 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { JwtGuard } from './jwt.guard';
 
 type ReqBody = {
   username: string;
   password: string;
 };
 
+// @UseGuards(JwtGuard) // Para bloquear o controller inteiro
 @Controller()
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -16,5 +18,13 @@ export class AuthController {
     const token = this.authService.login(body.username, body.password);
 
     return { token };
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('test-auth')
+  test() {
+    return {
+      name: 'Usuário autenticado!',
+    };
   }
 }
