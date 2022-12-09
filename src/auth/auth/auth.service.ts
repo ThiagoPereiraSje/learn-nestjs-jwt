@@ -45,6 +45,10 @@ export class AuthService {
       (u) => u.username === username && compareSync(password, u.password),
     );
 
+    if (!user) {
+      throw new Error('User not found!');
+    }
+
     return user;
   }
 }
